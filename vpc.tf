@@ -1,71 +1,71 @@
 resource "alicloud_vpc" "fw_vpc" {
-  name        = "${var.fw-vpc}-${random_id.randomId.hex}"
+  vpc_name    = "${var.fw-vpc}-${random_id.randomId.hex}"
   cidr_block  = var.fw-vpc-cidr
   description = "VPC for VM-Series on Alicloud"
 }
 
 resource "alicloud_vswitch" "FW1-vswitch-mgmt" {
-  name              = "FW1-VSwitch-MGMT"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.fw1-vswitch-mgmt-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[0].id
-  description       = "MGMT VSwitch for FW1-VM"
+  vswitch_name = "FW1-VSwitch-MGMT"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.fw1-vswitch-mgmt-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[0].id
+  description  = "MGMT VSwitch for FW1-VM"
 }
 
 resource "alicloud_vswitch" "FW1-vswitch-untrust" {
-  name              = "FW1-VSwitch-UNTRUST"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.fw1-vswitch-untrust-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[0].id
-  description       = "Untrust VSwitch for FW1-VM"
+  vswitch_name = "FW1-VSwitch-UNTRUST"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.fw1-vswitch-untrust-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[0].id
+  description  = "Untrust VSwitch for FW1-VM"
 }
 
 resource "alicloud_vswitch" "FW1-vswitch-trust" {
-  name              = "FW1-VSwitch-TRUST"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.fw1-vswitch-trust-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[0].id
-  description       = "Trust VSwitch for FW1-VM"
+  vswitch_name = "FW1-VSwitch-TRUST"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.fw1-vswitch-trust-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[0].id
+  description  = "Trust VSwitch for FW1-VM"
 }
 
 resource "alicloud_vswitch" "FW2-vswitch-mgmt" {
-  name              = "FW2-VSwitch-MGMT"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.fw2-vswitch-mgmt-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[1].id
-  description       = "MGMT VSwitch for FW2-VM"
+  vswitch_name = "FW2-VSwitch-MGMT"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.fw2-vswitch-mgmt-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[1].id
+  description  = "MGMT VSwitch for FW2-VM"
 }
 
 resource "alicloud_vswitch" "FW2-vswitch-untrust" {
-  name              = "FW2-VSwitch-UNTRUST"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.fw2-vswitch-untrust-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[1].id
-  description       = "Untrust VSwitch for FW2-VM"
+  vswitch_name = "FW2-VSwitch-UNTRUST"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.fw2-vswitch-untrust-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[1].id
+  description  = "Untrust VSwitch for FW2-VM"
 }
 
 resource "alicloud_vswitch" "FW2-vswitch-trust" {
-  name              = "FW2-VSwitch-TRUST"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.fw2-vswitch-trust-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[1].id
-  description       = "Trust VSwitch for FW2-VM"
+  vswitch_name = "FW2-VSwitch-TRUST"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.fw2-vswitch-trust-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[1].id
+  description  = "Trust VSwitch for FW2-VM"
 }
 
 resource "alicloud_vswitch" "Server1-vswitch" {
-  name              = "Server1-VSwitch"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.server1-vswitch-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[0].id
-  description       = "VSwitch for Server1"
+  vswitch_name = "Server1-VSwitch"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.server1-vswitch-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[0].id
+  description  = "VSwitch for Server1"
 }
 
 resource "alicloud_vswitch" "Server2-vswitch" {
-  name              = "Server2-VSwitch"
-  vpc_id            = alicloud_vpc.fw_vpc.id
-  cidr_block        = var.server2-vswitch-cidr
-  availability_zone = data.alicloud_zones.fw-zone.zones[1].id
-  description       = "VSwitch for Server2"
+  vswitch_name = "Server2-VSwitch"
+  vpc_id       = alicloud_vpc.fw_vpc.id
+  cidr_block   = var.server2-vswitch-cidr
+  zone_id      = data.alicloud_zones.fw-zone.zones[1].id
+  description  = "VSwitch for Server2"
 }
 
 resource "alicloud_security_group" "FW-MGMT-SG" {
@@ -126,6 +126,7 @@ resource "alicloud_security_group_rule" "allow_all" {
 
 resource "alicloud_route_entry" "default" {
   route_table_id        = alicloud_vpc.fw_vpc.route_table_id
+  name                  = "default-route"
   destination_cidrblock = "0.0.0.0/0"
   nexthop_type          = "NetworkInterface"
   nexthop_id            = module.fw1.eni-trust

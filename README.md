@@ -1,5 +1,5 @@
 # Alicloud Load-balancer Sandwich Architecture
-This template deploys two VM-Series firewalls in a Load-Balancer Sandwich architecture in Alibaba Cloud using the VM-Series 10.0.3 image on Alibaba Cloud Marketplace. The deployed ennvironment is as shown in the diagram below:
+This template deploys two VM-Series firewalls in a Load-Balancer Sandwich architecture in Alibaba Cloud using the VM-Series (10.0.3 or 11.0.0) images on Alibaba Cloud Marketplace. The deployed ennvironment is as shown in the diagram below:
 
 ![Alicloud Load-Balancer Sandwich](diagrams/Alicloud-LB-Sandwich.png)
 
@@ -7,7 +7,7 @@ This demo environment will allow you to showcase securing of Inbound and Outboun
 
 
 ## Prequisites:
-- Terraform 0.13
+- Terraform 
 - Python 3.8
 - Install python modules
   - pip3 install --upgrade -r requirements.txt
@@ -21,6 +21,7 @@ This demo environment will allow you to showcase securing of Inbound and Outboun
 - The HA script on the Monitor node is hosted on a storage bucket on Alicloud. Access to github is sometimes denied from Alicloud regions in China.
 - The "admin" password for the VM-Series after the sample config is committed is "PaloAlt0123". Please change the password as soon as the VM-Series comes online.
 - The VM-Series Marketplace image must use one of these instance families: g5, sn2, sn2ne
+- Not all Alicloud regions support DPDK. Please, make sure it's disabled when deploying in those zones or the Ethernet interfaces will not come up (`set system setting dpdk-pkt-io off`)
 
 
 ## Deployment
@@ -32,6 +33,7 @@ This demo environment will allow you to showcase securing of Inbound and Outboun
    - You can use the default values for the rest.
    - "linux_password" is the password for the linux instances, and also the temporary password used when the VM-Series admin passowrd is set upon first login. Please ensure it satisfies the complex password requirements for VM-Series.
    - If you want to bootstrap the VM-Series firewall and license the firewalls, set "bootstrap" to yes, and provide a valid auth_code to license both firewalls.
+   - "pan_os_version". Either 10.0.3 or 11.0.0. Default 11.0.0. If 
 
 2. Run "terraform init"
 
