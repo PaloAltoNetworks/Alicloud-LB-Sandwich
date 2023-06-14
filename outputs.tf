@@ -23,7 +23,7 @@ output "FW-2-Untrust" {
 }
 
 output "App-Access" {
-  value = "Access App via:  http://${alicloud_slb.skillet-ext-LB.address}"
+  value = "Access App via:  http://${alicloud_slb.external-LB.address}"
 }
 
 output "Server1_fw1_access" {
@@ -47,12 +47,12 @@ output "MonitorNode_access" {
 }
 
 output "password_new" {
-  value = var.linux_password
+  value     = var.linux_password
   sensitive = true
 }
 
 output "ssh_key_path" {
-  value = var.ssh_key_path
+  value     = var.ssh_key_path
   sensitive = true
 }
 

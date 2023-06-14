@@ -31,3 +31,4 @@ variable "fw_user_data" {}
 variable "bootstrap" {}
 
 variable "key_name" {}
+

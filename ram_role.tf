@@ -45,4 +45,6 @@ resource "alicloud_ram_role_policy_attachment" "vpc_pol_attach" {
 resource "alicloud_ram_role_attachment" "attach" {
   role_name    = alicloud_ram_role.MonitorNodeRole.name
   instance_ids = [alicloud_instance.MonitorServer.id]
+
+  depends_on = [alicloud_instance.MonitorServer]
 }

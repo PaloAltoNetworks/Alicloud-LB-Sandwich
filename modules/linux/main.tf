@@ -1,9 +1,8 @@
 terraform {
-  required_version = ">= 0.13"
   required_providers {
     alicloud = {
       source  = "aliyun/alicloud"
-      version = "~> 1.106.0"
+      version = "~> 1.206.0"
     }
   }
 }
@@ -13,7 +12,6 @@ provider "alicloud" {
   access_key = var.access_key
   secret_key = var.secret_key
   region     = var.region
-  version = "~> 1.106.0"
 }
 
 
@@ -32,7 +30,7 @@ resource "alicloud_instance" "Server" {
   description                   = var.name
   security_enhancement_strategy = "Active"
 
-  internet_max_bandwidth_out = 0
+  internet_max_bandwidth_out = 10
   instance_charge_type       = "PostPaid"
 
   user_data = <<EOF
@@ -48,7 +46,6 @@ do
   fi
 done
 sudo apt-get update && 
-sudo apt-get -y upgrade &&
 sudo apt-get install -y apache2 php libapache2-mod-php &&
 sudo rm -f /var/www/html/index.html &&
 sudo wget -O /var/www/html/index.php https://pa-scripts.oss-cn-shanghai.aliyuncs.com/showheaders.php &&

@@ -6,6 +6,7 @@ import time
 import paramiko
 from contextlib import closing
 
+
 def wait_until_channel_endswith(channel, endswith, wait_in_seconds=15):
     timeout = time.time() + wait_in_seconds
     read_buffer = b''
@@ -22,8 +23,11 @@ def fw_init(host, username, ssh_key_file, new_password):
         ssh_connection.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         ssh_connection.load_system_host_keys()
         k = paramiko.RSAKey.from_private_key_file(ssh_key_file)
+        timeout = int(600)
+        timeout_start = time.time()
 
-        while True:
+        while time.time() < timeout_start + timeout:
+            time.sleep(1)
             try:
                 ssh_connection.connect(hostname=host, username=username, pkey=k)
                 break
@@ -31,6 +35,7 @@ def fw_init(host, username, ssh_key_file, new_password):
                 print(e)
                 print("Waiting for vm-series to be available ...")
 
+        time.sleep(120)
         ssh_channel = ssh_connection.invoke_shell()
 
         wait_until_channel_endswith(ssh_channel, b'> ')
@@ -54,7 +59,7 @@ def fw_init(host, username, ssh_key_file, new_password):
         print("sent commit")
 
         # longer timeout of 60s to cater to commit time
-        wait_until_channel_endswith(ssh_channel, b'# ', 60)
+        wait_until_channel_endswith(ssh_channel, b'# ', 120)
         print("changed admin password")
 
 
@@ -68,8 +73,6 @@ fw2_mgmt = outputs['FW-2-Mgmt']['value']
 username = "admin"
 new_password = outputs['password_new']['value']
 ssh_key_path = outputs['ssh_key_path']['value']
-
-time.sleep(600)
 
 fw_init(fw1_mgmt, username, ssh_key_path, new_password)
 fw_init(fw2_mgmt, username, ssh_key_path, new_password)

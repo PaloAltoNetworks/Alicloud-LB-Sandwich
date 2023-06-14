@@ -110,6 +110,10 @@ variable "internal_lb_address" {
   default = "10.88.12.148"
 }
 
+variable "panos_version" {
+  default = "11.0.0"
+}
+
 variable "ssh_key_path" {}
 
 variable "bootstrap" {}

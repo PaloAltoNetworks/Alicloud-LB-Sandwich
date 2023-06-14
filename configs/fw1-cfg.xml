@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<config version="9.1.0" urldb="paloaltonetworks">
+<config version="10.0.0" urldb="paloaltonetworks">
   <mgt-config>
     <users>
       <entry name="admin">
@@ -464,7 +464,7 @@
           <rulebase>
             <security>
               <rules>
-                <entry name="Inbound_ssh" uuid="9cfb405e-e015-4f94-888b-e2019bee5b37">
+                <entry name="Inbound_ssh" uuid="47d73d79-58b8-44d0-b260-ecf8b8743135">
                   <to>
                     <member>trust</member>
                   </to>
@@ -491,12 +491,12 @@
                     <member>ssh-service-1001</member>
                     <member>ssh-service-1002</member>
                   </service>
-                  <hip-profiles>
-                    <member>any</member>
-                  </hip-profiles>
                   <action>allow</action>
+                  <source-hip>
+                    <member>any</member>
+                  </source-hip>
                 </entry>
-                <entry name="Inbound-Web" uuid="d4a78fc7-6aca-4c1e-bc3b-1bc4e2387b57">
+                <entry name="Inbound-Web" uuid="3f28eab8-478e-4228-89e9-d05d6d897e5b">
                   <to>
                     <member>trust</member>
                   </to>
@@ -521,12 +521,12 @@
                   <service>
                     <member>application-default</member>
                   </service>
-                  <hip-profiles>
-                    <member>any</member>
-                  </hip-profiles>
                   <action>allow</action>
+                  <source-hip>
+                    <member>any</member>
+                  </source-hip>
                 </entry>
-                <entry name="Outbound" uuid="3b910bfa-6e00-4637-b92f-40c1ca6150c7">
+                <entry name="Outbound" uuid="a2022dd9-fca9-441a-95ab-0da37ba7fcb5">
                   <to>
                     <member>untrust</member>
                   </to>
@@ -551,16 +551,16 @@
                   <service>
                     <member>application-default</member>
                   </service>
-                  <hip-profiles>
-                    <member>any</member>
-                  </hip-profiles>
                   <action>allow</action>
+                  <source-hip>
+                    <member>any</member>
+                  </source-hip>
                 </entry>
               </rules>
             </security>
             <nat>
               <rules>
-                <entry name="Outbound-SNAT" uuid="0f0da488-0d37-4963-87e5-3c0c67b1b2f8">
+                <entry name="Outbound-SNAT" uuid="20219182-4a78-4516-a7fa-12551a17f506">
                   <source-translation>
                     <dynamic-ip-and-port>
                       <interface-address>
@@ -582,7 +582,7 @@
                   </destination>
                   <service>any</service>
                 </entry>
-                <entry name="inbound_ssh1" uuid="de7b35a9-437f-434a-8f03-73070e39eaba">
+                <entry name="inbound_ssh1" uuid="93673bba-4f5e-4d4d-b11a-ab049081f65a">
                   <to>
                     <member>untrust</member>
                   </to>
@@ -608,7 +608,7 @@
                     <translated-port>22</translated-port>
                   </destination-translation>
                 </entry>
-                <entry name="inbound_ssh2" uuid="4c542473-9f36-45b8-9ac0-0dc15bc5ea7a">
+                <entry name="inbound_ssh2" uuid="952eb8b3-07ef-4c3a-8330-f24128bace8e">
                   <to>
                     <member>untrust</member>
                   </to>
@@ -634,7 +634,7 @@
                     <translated-port>22</translated-port>
                   </destination-translation>
                 </entry>
-                <entry name="inbound_ssh3" uuid="30c3b08d-f8fe-409b-be64-d16eb4c08fd0">
+                <entry name="inbound_ssh3" uuid="0e16a3d7-f007-4791-acfc-44b5955e7d5f">
                   <to>
                     <member>untrust</member>
                   </to>
@@ -660,7 +660,7 @@
                     <translated-port>22</translated-port>
                   </destination-translation>
                 </entry>
-                <entry name="Inbound-DNAT" uuid="5935c93a-1088-4933-9611-411e1ce69ec5">
+                <entry name="Inbound-DNAT" uuid="1771de99-fa58-44d0-b768-e9acc74e5b9b">
                   <source-translation>
                     <dynamic-ip-and-port>
                       <interface-address>
@@ -702,6 +702,9 @@
               <description>IP Address of the Internal Alicloud LB</description>
             </entry>
           </address>
+          <user-id-collector>
+            <setting/>
+          </user-id-collector>
         </entry>
       </vsys>
     </entry>
