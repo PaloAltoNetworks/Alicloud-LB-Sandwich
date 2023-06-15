@@ -21,7 +21,7 @@ data "alicloud_zones" "fw-zone" {
 
 data "alicloud_images" "vmseries" {
   owners       = "marketplace"
-  name_regex   = "VM-Series VM Series ${var.panos_version}"
+  name_regex   = "(VM-Series|VM Series) ${var.panos_version}"
   architecture = "x86_64"
   os_type      = "linux"
 }
