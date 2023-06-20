@@ -1,5 +1,5 @@
 resource "alicloud_ram_role" "MonitorNodeRole" {
-  name     = "MonitorNodeRole"
+  name     = "MonitorNodeRole-${random_id.randomId.hex}"
   document = <<EOF
   {
     "Statement": [
