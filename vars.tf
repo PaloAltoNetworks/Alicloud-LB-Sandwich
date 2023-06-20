@@ -121,3 +121,5 @@ variable "bootstrap" {}
 variable "auth_code" {}
 
 variable "key_name" {}
+
+variable "image_id" {}
