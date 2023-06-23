@@ -123,3 +123,7 @@ variable "auth_code" {}
 variable "key_name" {}
 
 variable "image_id" {}
+
+variable "disk_category" {
+  default = "cloud_essd"
+}

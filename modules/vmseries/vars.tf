@@ -32,3 +32,5 @@ variable "bootstrap" {}
 
 variable "key_name" {}
 
+variable "disk_category" {}
+

@@ -17,17 +17,17 @@ module "fw1" {
   zone = data.alicloud_zones.fw-zone.zones[0].id
 
   instance_type = var.instance-type
+  disk_category = var.disk_category
 
   image_id = data.alicloud_images.vmseries.images[0].id
 
   key_name   = var.key_name
   access_key = var.access_key
   secret_key = var.secret_key
-  region     = var.region
+  region     = var.region  
 
   bootstrap    = var.bootstrap
   fw_user_data = local.fw1_user_data
-
 }
 
 module "fw2" {
@@ -49,6 +49,7 @@ module "fw2" {
   zone = data.alicloud_zones.fw-zone.zones[1].id
 
   instance_type = var.instance-type
+  disk_category = var.disk_category
 
   image_id = data.alicloud_images.vmseries.images[0].id
 
