@@ -1,6 +1,6 @@
 resource "alicloud_slb" "external-LB" {
-  load_balancer_name                 = "External-LB"
-  load_balancer_spec        = "slb.s1.small"
+  load_balancer_name   = "External-LB"
+  load_balancer_spec   = "slb.s1.small"
   address_type         = "internet"
   internet_charge_type = "PayByTraffic"
   # instance_charge_type = "PostPaid"
@@ -15,29 +15,29 @@ resource "alicloud_slb_server_group" "vm-fw-pool-1" {
 }
 
 resource "alicloud_slb_server_group_server_attachment" "fw1_attachment" {
-    server_group_id = alicloud_slb_server_group.vm-fw-pool-1.id
-    server_id = module.fw1.eni-untrust
-    port       = 80
-    weight     = 100
-    type       = "eni"
-    
-    depends_on = [
-      module.fw1,
-      alicloud_slb.external-LB
-    ]
+  server_group_id = alicloud_slb_server_group.vm-fw-pool-1.id
+  server_id       = module.fw1.eni-untrust
+  port            = 80
+  weight          = 100
+  type            = "eni"
+
+  depends_on = [
+    module.fw1,
+    alicloud_slb.external-LB
+  ]
 }
 
 resource "alicloud_slb_server_group_server_attachment" "fw2_attachment" {
-    server_group_id = alicloud_slb_server_group.vm-fw-pool-1.id
-    server_id = module.fw2.eni-untrust
-    port       = 80
-    weight     = 100
-    type       = "eni"
-    
-    depends_on = [
-      module.fw2,
-      alicloud_slb.external-LB
-    ]
+  server_group_id = alicloud_slb_server_group.vm-fw-pool-1.id
+  server_id       = module.fw2.eni-untrust
+  port            = 80
+  weight          = 100
+  type            = "eni"
+
+  depends_on = [
+    module.fw2,
+    alicloud_slb.external-LB
+  ]
 }
 
 resource "alicloud_slb_listener" "ext-http-listener" {
@@ -53,6 +53,6 @@ resource "alicloud_slb_listener" "ext-http-listener" {
   depends_on = [
     alicloud_slb_server_group_server_attachment.fw1_attachment,
     alicloud_slb_server_group_server_attachment.fw2_attachment
-    ]
+  ]
 }
 

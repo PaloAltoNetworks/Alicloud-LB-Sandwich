@@ -1,9 +1,9 @@
 resource "alicloud_slb" "internal-LB" {
-  load_balancer_name                 = "Internal-LB"
-  load_balancer_spec        = "slb.s1.small"
-  address_type         = "intranet"
-  vswitch_id           = alicloud_vswitch.FW2-vswitch-trust.id
-  address              = var.internal_lb_address
+  load_balancer_name = "Internal-LB"
+  load_balancer_spec = "slb.s1.small"
+  address_type       = "intranet"
+  vswitch_id         = alicloud_vswitch.FW2-vswitch-trust.id
+  address            = var.internal_lb_address
 }
 
 resource "alicloud_slb_server_group" "server-pool-1" {
@@ -18,24 +18,24 @@ resource "alicloud_slb_server_group" "server-pool-1" {
 }
 
 resource "alicloud_slb_server_group_server_attachment" "server1_attachment" {
-    server_group_id = alicloud_slb_server_group.server-pool-1.id
-    server_id = module.server1.server-id
-    port       = 80
-    weight     = 100
-    depends_on = [
-      module.server1,
-      alicloud_slb.internal-LB
+  server_group_id = alicloud_slb_server_group.server-pool-1.id
+  server_id       = module.server1.server-id
+  port            = 80
+  weight          = 100
+  depends_on = [
+    module.server1,
+    alicloud_slb.internal-LB
   ]
 }
 
 resource "alicloud_slb_server_group_server_attachment" "server2_attachment" {
-    server_group_id = alicloud_slb_server_group.server-pool-1.id
-    server_id = module.server2.server-id
-    port       = 80
-    weight     = 100
-    depends_on = [
-      module.server2,
-      alicloud_slb.internal-LB
+  server_group_id = alicloud_slb_server_group.server-pool-1.id
+  server_id       = module.server2.server-id
+  port            = 80
+  weight          = 100
+  depends_on = [
+    module.server2,
+    alicloud_slb.internal-LB
   ]
 }
 
@@ -52,6 +52,6 @@ resource "alicloud_slb_listener" "int-http-listener" {
   depends_on = [
     alicloud_slb_server_group_server_attachment.server1_attachment,
     alicloud_slb_server_group_server_attachment.server2_attachment
-    ]
+  ]
 }
 
