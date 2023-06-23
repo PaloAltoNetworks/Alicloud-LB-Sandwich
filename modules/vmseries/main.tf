@@ -56,7 +56,8 @@ resource "alicloud_instance" "vmseries" {
   security_groups            = var.mgmt_sg
   instance_type              = var.instance_type
   system_disk_size           = 60
-  system_disk_category       = "cloud_efficiency"
+  # system_disk_category       = "cloud_efficiency"
+  system_disk_category       = var.disk_category
   system_disk_name           = "${var.name}-disk0"
   image_id                   = var.image_id
   instance_name              = var.name

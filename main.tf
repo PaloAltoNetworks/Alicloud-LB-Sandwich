@@ -16,7 +16,7 @@ provider "alicloud" {
 
 data "alicloud_zones" "fw-zone" {
   available_instance_type = var.instance-type
-  available_disk_category = "cloud_efficiency"
+  available_disk_category = var.disk_category
 }
 
 data "alicloud_images" "vmseries" {
