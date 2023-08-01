@@ -127,3 +127,5 @@ variable "image_id" {}
 variable "disk_category" {
   default = "cloud_essd"
 }
+
+variable "fw_zone" {}

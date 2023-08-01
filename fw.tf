@@ -14,7 +14,8 @@ module "fw1" {
   trust_sg      = [alicloud_security_group.FW-DATA-SG.id]
   trust_ip      = var.FW1-TRUST-IP
 
-  zone = data.alicloud_zones.fw-zone.zones[0].id
+  # zone = data.alicloud_zones.fw-zone.zones[0].id
+  zone = var.fw_zone[0] != "" ? var.fw_zone[0] : data.alicloud_zones.fw-zone.zones[0].id
 
   instance_type = var.instance-type
   disk_category = var.disk_category
@@ -46,7 +47,8 @@ module "fw2" {
   trust_sg      = [alicloud_security_group.FW-DATA-SG.id]
   trust_ip      = var.FW2-TRUST-IP
 
-  zone = data.alicloud_zones.fw-zone.zones[1].id
+  # zone = data.alicloud_zones.fw-zone.zones[1].id
+  zone = var.fw_zone[1] != "" ? var.fw_zone[1] : data.alicloud_zones.fw-zone.zones[1].id
 
   instance_type = var.instance-type
   disk_category = var.disk_category

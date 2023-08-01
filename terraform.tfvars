@@ -10,3 +10,5 @@ bootstrap           = "no"
 auth_code           = ""
 panos_version       = "11.0.0"
 disk_category       = "cloud_essd"
+fw_zone = ["", ""]   // example --> fw_zone = ["cn-shanghai-b", "cn-shanghai-l"]
+image_id = ""

@@ -56,3 +56,10 @@ output "ssh_key_path" {
   sensitive = true
 }
 
+output "alicloud_zones_1" {
+  value = data.alicloud_zones.fw-zone.zones[0].id
+}
+
+output "alicloud_zones_2" {
+  value = data.alicloud_zones.fw-zone.zones[1].id
+}

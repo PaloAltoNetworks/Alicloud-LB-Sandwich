@@ -2,23 +2,23 @@ variable "name" {
   description = "firewall instance name"
 }
 
-variable  "mgmt_vswitch" {}
-variable  "mgmt_sg" {}
-variable  "mgmt_ip" {}
+variable "mgmt_vswitch" {}
+variable "mgmt_sg" {}
+variable "mgmt_ip" {}
 
-variable  "untrust_vswitch" {}
-variable  "untrust_sg" {}
-variable  "untrust_ip" {}
+variable "untrust_vswitch" {}
+variable "untrust_sg" {}
+variable "untrust_ip" {}
 
-variable  "trust_vswitch" {}
-variable  "trust_sg" {}
-variable  "trust_ip" {}
+variable "trust_vswitch" {}
+variable "trust_sg" {}
+variable "trust_ip" {}
 
-variable  "zone" {} 
+variable "zone" {}
 
-variable  "instance_type" {} 
+variable "instance_type" {}
 
-variable  "image_id" {} 
+variable "image_id" {}
 
 variable "access_key" {}
 

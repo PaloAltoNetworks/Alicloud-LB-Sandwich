@@ -17,22 +17,22 @@ provider "alicloud" {
 
 # Create Untrust Interface
 resource "alicloud_network_interface" "fw-eni1" {
-  network_interface_name            = "${var.name}-eni1"
-  vswitch_id      = var.untrust_vswitch
-  primary_ip_address      = var.untrust_ip
-  security_group_ids = var.untrust_sg
+  network_interface_name = "${var.name}-eni1"
+  vswitch_id             = var.untrust_vswitch
+  primary_ip_address     = var.untrust_ip
+  security_group_ids     = var.untrust_sg
 }
 
 # Create Trust Interface
 resource "alicloud_network_interface" "fw-eni2" {
-  network_interface_name            = "${var.name}-eni2"
-  vswitch_id      = var.trust_vswitch
-  primary_ip_address      = var.trust_ip
-  security_group_ids = var.trust_sg
+  network_interface_name = "${var.name}-eni2"
+  vswitch_id             = var.trust_vswitch
+  primary_ip_address     = var.trust_ip
+  security_group_ids     = var.trust_sg
 }
 
 resource "alicloud_eip" "fw-eip" {
-  address_name                 = "${var.name}-eip"
+  address_name         = "${var.name}-eip"
   description          = "EIP assigned to ${var.name} Untrust interface"
   bandwidth            = "1"
   internet_charge_type = "PayByTraffic"
@@ -52,10 +52,10 @@ resource "alicloud_eip_association" "eip_asso" {
 
 # Launch Instance with Mgmt Interface
 resource "alicloud_instance" "vmseries" {
-  availability_zone          = var.zone
-  security_groups            = var.mgmt_sg
-  instance_type              = var.instance_type
-  system_disk_size           = 60
+  availability_zone = var.zone
+  security_groups   = var.mgmt_sg
+  instance_type     = var.instance_type
+  system_disk_size  = 60
   # system_disk_category       = "cloud_efficiency"
   system_disk_category       = var.disk_category
   system_disk_name           = "${var.name}-disk0"

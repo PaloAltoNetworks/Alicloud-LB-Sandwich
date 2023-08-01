@@ -17,6 +17,8 @@ provider "alicloud" {
 data "alicloud_zones" "fw-zone" {
   available_instance_type = var.instance-type
   available_disk_category = var.disk_category
+  output_file = "zones-data.txt"
+  enable_details = true
 }
 
 data "alicloud_images" "vmseries" {
